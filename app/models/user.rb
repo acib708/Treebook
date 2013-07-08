@@ -13,14 +13,13 @@ class User < ActiveRecord::Base
   has_many :statuses
   
   #Tests, validation
-  validates_presence_of :first_name, :last_name, :profile_name
+  validates_presence_of :first_name, :last_name
   validates :profile_name, presence: true,
-  						   uniqueness: true
-  						   # format:{
-# 	  						   with: /0-9a-zA-Z/,
-# 	  						   message: 'Must be formatted correctly.'
-#   						   }
-  
+  						   uniqueness: true,
+  						   format:{
+	  						   with: /^[a-zA-Z0-9_-]+$/,
+	  						   message: 'Must be formatted correctly.'
+  						   }
   #Methods
   def full_name
   	first_name + " " + last_name
