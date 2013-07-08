@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  content: MyText
+  content: "Hey! I'm on Treebook!"
   user: acib708
 
 two:
-  content: MyText
+  content: "I'm Alex"
   user: acib708
+  
+three:
+  content: "I'm Tuch"
+  user: tuch
