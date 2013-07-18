@@ -41,14 +41,14 @@ class StatusesController < ApplicationController
   # POST /statuses
   # POST /statuses.json
   def create
-    @status = Status.new(params[:status])
+    @status = current_user.statuses.new(params[:status])
 
     respond_to do |format|
       if @status.save
         format.html { redirect_to @status, notice: 'Status was successfully created.' }
         format.json { render json: @status, status: :created, location: @status }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @status.errors, status: :unprocessable_entity }
       end
     end
@@ -57,14 +57,16 @@ class StatusesController < ApplicationController
   # PUT /statuses/1
   # PUT /statuses/1.json
   def update
-    @status = Status.find(params[:id])
-
+    @status = current_user.statuses.find(params[:id])
+    if params[:status] and params[:status].has_key? :user_id
+      params[:status].delete :user_id
+    end
     respond_to do |format|
       if @status.update_attributes(params[:status])
         format.html { redirect_to @status, notice: 'Status was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @status.errors, status: :unprocessable_entity }
       end
     end
