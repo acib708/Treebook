@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   
   #Relationships
   has_many :statuses
+  has_many :user_friendships
+  has_many :friends, through: :user_friendships
   
   #Tests, validation
   validates_presence_of :first_name, :last_name
