@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
+  #noinspection RailsParamDefResolve
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :profile_name
   # attr_accessible :title, :body
   
@@ -22,7 +23,7 @@ class User < ActiveRecord::Base
   						   }
   #Methods
   def full_name
-  	first_name + " " + last_name
+  	first_name + ' ' + last_name
   end
   
   def gravatar_url
