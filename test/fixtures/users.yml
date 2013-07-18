@@ -7,5 +7,11 @@ acib708:
 tuch:
   first_name: "Ricardo"
   last_name: "Zertuche"
-  email: "zertuchericky@hotamail.com"
+  email: "zertuchericky@hotmail.com"
   profile_name: "tuch"
+
+bo:
+  first_name: "Rodrigo"
+  last_name: "Cardenas"
+  email: "cardenas125@gmail.com"
+  profile_name: "bo"
