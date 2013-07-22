@@ -8,14 +8,10 @@ gem 'rails', '3.2.13'
 gem 'devise'
 gem 'simple_form'
 gem 'state_machine'
+gem 'pg'
 
 group :development, :test do
-	gem 'sqlite3'
   gem 'minitest-reporters'
-end
-
-group :production do
-	gem 'pg'
 end
 
 group :test do
