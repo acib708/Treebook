@@ -49,6 +49,22 @@ class UserFriendshipTest < ActiveSupport::TestCase
       users(:acib708).friends.reload
       assert users(:acib708).friends.include? users :bo
     end
+  end
+
+  context '.request' do
+
+    should 'create two user friendships' do
+      assert_difference 'UserFriendship.count', 2 do
+        UserFriendship.request users(:acib708), users(:tuch)
+      end
+    end
+
+    should 'send a friend request email' do
+      assert_difference 'ActionMailer::Base.deliveries.size', 1 do
+        UserFriendship.request users(:acib708), users(:tuch)
+      end
+    end
 
   end
+
 end

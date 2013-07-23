@@ -11,7 +11,12 @@
 			<%= link_to image_tag(status.user.gravatar_url, class: 'img-circle'), profile_path(status.user.profile_name) %>
 		</div>
 		<div class="span7">
-			<strong><%= status.user.full_name %></strong>
+			<strong>
+              <%=
+                  #link_to status.user.full_name , profile_path(status.user.profile_name) #Use this line, but remove link class
+                  status.user.full_name
+              %>
+            </strong>
 			<p><%= status.content %></p>
 			<div class="meta">
 				<%= link_to time_ago_in_words(status.created_at) + ' ago', status %>

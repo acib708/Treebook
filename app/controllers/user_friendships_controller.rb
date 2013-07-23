@@ -1,5 +1,22 @@
 class UserFriendshipsController < ApplicationController
-  before_filter :authenticate_user!, only: [:new]
+  before_filter :authenticate_user!
+
+  def index
+    @user_friendships = current_user.user_friendships.all
+  end
+
+  def accept
+    @user_friendship = current_user.user_friendships.find(params[:id])
+
+    if @user_friendship.accept!
+      flash[:success] = "You are now friends with #{@user_friendship.friend.full_name}!"
+    else
+      flash[:error] = 'Friendship could not be accepted.'
+    end
+
+    redirect_to user_friendships_path
+  end
+
   def new
     if params[:friend_id]
       @friend = User.find(params[:friend_id])
@@ -25,4 +42,10 @@ class UserFriendshipsController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def edit
+    @user_friendship = current_user.user_friendships.find(params[:id])
+    @friend = @user_friendship.friend
+  end
+
 end

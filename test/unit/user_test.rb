@@ -52,8 +52,8 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'that creating friendships on a user works' do
-    users(:acib708).friends.push users(:tuch) #bo is already acib708's friend (specified in fixture one), chosing tuch
-    users(:acib708).friends.reload
-    assert users(:acib708).friends.include? users(:tuch)
+    users(:acib708).pending_friends.push users(:tuch)
+    users(:acib708).pending_friends.reload
+    assert users(:acib708).pending_friends.include? users(:tuch)
   end
 end
