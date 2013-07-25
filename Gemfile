@@ -8,7 +8,9 @@ gem 'rails', '3.2.13'
 gem 'devise'
 gem 'simple_form'
 gem 'state_machine'
+gem 'draper'
 gem 'pg'
+gem 'js-routes'
 
 group :development, :test do
   gem 'minitest-reporters'

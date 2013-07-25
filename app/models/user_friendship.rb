@@ -6,13 +6,13 @@ class UserFriendship < ActiveRecord::Base
 
   after_destroy :delete_mutual_friendship!
 
-  state_machine :state, initial: :pending do
+  state_machine :state, initial: 'pending' do
     after_transition on: :accept, do: [:send_acceptance_email, :accept_mutual_friendship!]
 
-    state :requested
+    state 'requested'
 
     event :accept do
-      transition any => :accepted
+      transition any => 'accepted'
     end
   end
 
