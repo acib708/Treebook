@@ -112,6 +112,14 @@ class UserFriendshipsControllerTest < ActionController::TestCase
         end
       end
 
+      context 'successfully' do
+        should 'create two user friendship objects' do
+          assert_difference 'UserFriendship.count', 2 do
+            post :create, user_friendship: { friend_id: users(:bo) }
+          end
+        end
+      end
+
       context 'with valid friend id' do
         setup { post :create, user_friendship: { friend_id: users(:bo) } }
         should 'assign a friend object, and a user_friendship object' do
@@ -130,7 +138,7 @@ class UserFriendshipsControllerTest < ActionController::TestCase
 
         should 'set flash message to notify friendship was successful' do
           assert flash[:success]
-          assert_equal "You are now friends with #{users(:bo).full_name}!", flash[:success]
+          assert_equal "Friend request sent to #{users(:bo).full_name}!", flash[:success]
         end
 
       end
@@ -148,7 +156,9 @@ class UserFriendshipsControllerTest < ActionController::TestCase
 
     context 'when logged in' do
       setup do
-        @user_friendship = create(:pending_user_friendship, user: users(:acib708))
+        @friend = create :user
+        @user_friendship = create(:pending_user_friendship, user: users(:acib708), friend: @friend)
+        create(:pending_user_friendship, friend: users(:acib708), user: @friend)
         sign_in users :acib708
         put :accept, id: @user_friendship
         @user_friendship.reload
@@ -198,4 +208,32 @@ class UserFriendshipsControllerTest < ActionController::TestCase
     end
   end
 
+  context '#destroy' do
+    context 'when not logged in' do
+      should 'redirect to login page' do
+        delete :destroy, id: 1
+        assert_response :redirect
+        assert_redirected_to login_path
+      end
+    end
+
+    context 'when logged in' do
+      setup do
+        @friend = create :user
+        @user_friendship = create(:pending_user_friendship, user: users(:acib708), friend: @friend)
+        create(:pending_user_friendship, friend: users(:acib708), user: @friend)
+        sign_in users :acib708
+      end
+
+      should 'delete user friendship and set flash message accordingly' do
+        assert_difference 'UserFriendship.count', -2 do
+          delete :destroy, id: @user_friendship
+        end
+
+        assert_equal flash[:success], "You are no longer friends with #{@user_friendship.friend.full_name}"
+
+      end
+
+    end
+  end
 end

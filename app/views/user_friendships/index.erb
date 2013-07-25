@@ -18,7 +18,7 @@
             <%= link_to 'Accept request.', edit_user_friendship_path(friendship) %>
         <% elsif friendship.accepted? %>
             <em>Friendship started <%= time_ago_in_words friendship.updated_at %> ago.</em>
-            <%= link_to 'Update request.', edit_user_friendship_path(friendship) %>
+            <%= link_to 'Update friendship.', edit_user_friendship_path(friendship) %>
         <% end %>
       </div>
     </div>

@@ -12,10 +12,10 @@ class AddAFriendTest < ActionDispatch::IntegrationTest
     get "/user_friendships/new?friend_id=#{users(:bo).to_param}"
     assert_response :success
 
-    assert_difference 'UserFriendship.count' do
+    assert_difference 'UserFriendship.count', 2 do
       post '/user_friendships', user_friendship: { friend_id: users(:bo).to_param }
       assert_response :redirect
-      assert_equal flash[:success], "You are now friends with #{users(:bo).full_name}!"
+      assert_equal flash[:success], "Friend request sent to #{users(:bo).full_name}!"
     end
   end
 end
