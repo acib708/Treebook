@@ -3,11 +3,11 @@
 </div>
 
 <% if signed_in? %>
-    <div class="friend-status">
-      <% if current_user.friends.include? @user %>
+    <div id="friend-status">
+      <% if current_user.friends.include? @user or current_user.pending_friends.include? @user %>
           <%= link_to 'Edit Friendship', edit_user_friendship_path(friend_id: @user), class: 'btn btn-info' %>
       <% else %>
-          <%= link_to 'Add as Friend', new_user_friendship_path(friend_id: @user), class: 'btn btn-info' %>
+          <%= link_to 'Add as Friend', new_user_friendship_path(friend_id: @user), class: 'btn btn-info', id: 'add-friendship', data: { friend_id: @user.to_param } %>
       <% end %>
     </div>
 <% end %>

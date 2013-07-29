@@ -16,3 +16,9 @@ bo:
   last_name: "Cardenas"
   email: "cardenas125@gmail.com"
   profile_name: "bo"
+
+blocked_friend:
+  first_name: 'Blocked'
+  last_name: 'Friend'
+  email: blocked@gmail.com
+  profile_name: 'youblockedme'

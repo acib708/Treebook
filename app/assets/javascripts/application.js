@@ -11,5 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require js-routes
 //= require jquery_ujs
 //= require_tree .

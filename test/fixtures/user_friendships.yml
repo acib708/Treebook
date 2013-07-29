@@ -1,3 +1,9 @@
 one:
   user: acib708
   friend: bo
+
+blocked_by_acib:
+  user: acib708
+  friend: blocked_friend
+  state: 'blocked'
+

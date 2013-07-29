@@ -3,6 +3,12 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   should have_many :user_friendships
   should have_many :friends
+  should have_many :pending_user_friendships
+  should have_many :pending_friends
+  should have_many :requested_user_friendships
+  should have_many :requested_friends
+  should have_many :blocked_user_friendships
+  should have_many :blocked_friends
 
   test 'User should enter First Name' do
   	user = User.new
@@ -56,4 +62,5 @@ class UserTest < ActiveSupport::TestCase
     users(:acib708).pending_friends.reload
     assert users(:acib708).pending_friends.include? users(:tuch)
   end
+
 end
