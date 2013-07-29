@@ -38,7 +38,11 @@ class User < ActiveRecord::Base
   def full_name
   	first_name + ' ' + last_name
   end
-  
+
+  def has_blocked?(user)
+    blocked_friends.include? user
+  end
+
   def gravatar_url
   	"http://gravatar.com/avatar/#{ Digest::MD5.hexdigest email.strip.downcase }"
   end

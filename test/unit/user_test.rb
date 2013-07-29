@@ -63,4 +63,14 @@ class UserTest < ActiveSupport::TestCase
     assert users(:acib708).pending_friends.include? users(:tuch)
   end
 
+  context '#has_blocked?' do
+    should 'return true if a user has blocked the other user' do
+      assert users(:acib708).has_blocked?(users(:blocked_friend)) #blocked_friend is defeined as blocked by user acib708 in the fixtures
+    end
+
+    should 'return false if a user has not blocked the other user' do
+      assert !users(:acib708).has_blocked?(users(:bo))
+    end
+  end
+
 end
