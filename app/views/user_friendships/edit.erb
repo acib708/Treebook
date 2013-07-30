@@ -5,28 +5,29 @@
 <div class="row">
   <div class="avatar span2">
     <%= image_tag @user_friendship.user.gravatar_url, class: 'img-circle' %><br />
-    <%= @user_friendship.user.first_name %>
+    <p><%= @user_friendship.user.full_name %></p>
   </div>
   <div class="avatar span2">
     <%= image_tag @user_friendship.friend.gravatar_url, class: 'img-circle' %><br />
-    <%= @user_friendship.friend.first_name %>
+    <p><%= @user_friendship.friend.full_name %></p>
   </div>
 </div>
+<hr />
 
 <h3><%= @user_friendship.submessage %></h3>
 
 <div class="form-actions">
   <% if @user_friendship.requested? %>
       <%= form_for @user_friendship, url: accept_user_friendship_path(@user_friendship), method: :put do |form| %>
-          <%= submit_tag 'Accept Friendship', class: 'btn btn-info' %>
+          <%= submit_tag "Accept Friendship", class: 'btn btn-primary' %>
       <% end %>
-      <%= form_for @user_friendship, url: block_user_friendship_path(@user_friendship), method: :put do |form| %>
-          <%= submit_tag 'Block User', class: 'btn btn-danger' %>
-      <% end %>
+  <% end %>
+
+  <%= form_for @user_friendship, url: block_user_friendship_path(@user_friendship), method: :put do |form| %>
+      <%= submit_tag "Block Friendship", class: 'btn' %>
   <% end %>
 
   <%= form_for @user_friendship, url: user_friendship_path(@user_friendship), method: :delete do |form| %>
-      <%= submit_tag 'Delete Friendship', class: 'btn btn-danger' %>
+      <%= submit_tag "Delete Friendship", class: 'btn btn-danger' %>
   <% end %>
-
 </div>
