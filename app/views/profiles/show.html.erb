@@ -1,23 +1,37 @@
-<div class="page-header">
-	<h1><%= @user.full_name %></h1>
-</div>
+<%= page_header do %>
+    <h1>
+      <%= avatar_profile_link @user, {class: 'img-circle'} %>
+      <%= @user.full_name %>
+    </h1>
+<% end %>
 
 <% if signed_in? %>
     <div id="friend-status">
       <% if current_user.friends.include? @user or current_user.pending_friends.include? @user %>
-          <%= link_to 'Edit Friendship', edit_user_friendship_path(friend_id: @user), class: 'btn btn-info' %>
-      <% else %>
-          <%= link_to 'Add as Friend', new_user_friendship_path(friend_id: @user), class: 'btn btn-info', id: 'add-friendship', data: { friend_id: @user.to_param } %>
+          <%= link_to 'Edit Friendship', edit_user_friendship_path(friend_id: @user), class: 'btn' %>
+      <% elsif current_user != @user %>
+          <%= link_to 'Add Friend', new_user_friendship_path(friend_id: @user), class: 'btn btn-primary', id: 'add-friendship', data: { friend_id: @user.to_param } %>
       <% end %>
     </div>
 <% end %>
 
+<br />
+
 <% if @statuses %>
-	<% @statuses.each do |status| %>
-		<div class="well">
-			<%= status.content %>
-			<hr />
-			<%= link_to time_ago_in_words(status.created_at) + " ago", status_path(status) %>
-		</div>
-	<% end %>
+    <h3>
+      <%=
+          if current_user == @user
+              'Your'
+          else
+            "#{@user.first_name}'s"
+          end
+      %>
+          status updates:</h3>
+    <% @statuses.each do |status| %>
+        <div class="well">
+          <%= status.content %>
+          <hr />
+          <%= link_to time_ago_in_words(status.created_at), status_path(status) %> ago
+        </div>
+    <% end %>
 <% end %>
