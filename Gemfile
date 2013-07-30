@@ -11,6 +11,7 @@ gem 'state_machine'
 gem 'draper'
 gem 'pg'
 gem 'js-routes'
+gem 'paperclip'
 
 group :development, :test do
   gem 'minitest-reporters'
