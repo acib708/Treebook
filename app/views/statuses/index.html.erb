@@ -19,6 +19,7 @@
                   %>
                 </strong>
                 <p><%= status.content %></p>
+                <%= display_attachment status, false %>
                 <div class="meta">
                     <%= link_to time_ago_in_words(status.created_at) + ' ago', status %>
                     <span class="admin">

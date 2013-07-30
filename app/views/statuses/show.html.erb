@@ -15,6 +15,9 @@
     </p>
 
     <hr />
+
+    <%= display_attachment @status %>
+
     <div class="meta">
       <%= link_to 'Back', statuses_path %>
       <% if signed_in? && @status.user == current_user %>
