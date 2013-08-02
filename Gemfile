@@ -20,6 +20,7 @@ end
 group :test do
   gem 'shoulda'
   gem 'factory_girl_rails'
+  gem 'thin'
 end
 
 # Gems used only for assets and not required
