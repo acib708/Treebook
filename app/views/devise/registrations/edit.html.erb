@@ -2,7 +2,7 @@
     <h2>Edit My Profile</h2>
 <% end %>
 
-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, class: 'form-horizontal '}) do |f| %>
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-horizontal '}) do |f| %>
     <%= devise_error_messages! %>
 
     <fieldset>
@@ -13,6 +13,20 @@
     </fieldset>
 
     <fieldset>
+      <legend>Profile Picture</legend>
+      <%= f.input :avatar, as: :file %>
+
+      <% if f.object.avatar? %>
+          <div class="control-group">
+            <label class="control-label">Current avatar</label>
+            <div class="controls">
+              <%= image_tag f.object.avatar.url(:small) %>
+            </div>
+          </div>
+      <% end %>
+    </fieldset>
+
+    <fieldset>
       <legend>Update Password</legend>
       <%= f.input :password, hint: "Leave blank if you don't want to change it", input_html: { class: 'input-xxlarge', autocomplete: 'off' } %>
       <%= f.input :password_confirmation, input_html: { class: 'input-xxlarge', autocomplete: 'off' } %>
@@ -20,13 +34,13 @@
 
     <fieldset>
       <legend>Confirm Changes</legend>
-      <%= f.input :current_password, hint: "We need your current password to confirm your changes", input_html: { class: 'input-xxlarge', autocomplete: 'off' } %>
+      <%= f.input :current_password, hint: 'We need your current password to confirm your changes', input_html: { class: 'input-xxlarge', autocomplete: 'off' } %>
     </fieldset>
 
     <div class="form-actions">
-      <%= f.submit "Update", class: 'btn btn-primary' %>
-      <%= link_to "Back", root_path, class: 'btn' %>
-      <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, class: 'btn btn-danger pull-right' %>
+      <%= f.submit 'Update', class: 'btn btn-primary' %>
+      <%= link_to 'Back', root_path, class: 'btn' %>
+      <%= link_to 'Cancel my account', registration_path(resource_name), data: { confirm: 'Are you sure?'}, method: :delete, class: 'btn btn-danger pull-right' %>
     </div>
 <% end %>
 

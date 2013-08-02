@@ -4,11 +4,11 @@
 
 <div class="row">
   <div class="avatar span2">
-    <%= image_tag @user_friendship.user.gravatar_url, class: 'img-circle' %><br />
+    <%= avatar_profile_link @user_friendship.user %><br />
     <p><%= @user_friendship.user.full_name %></p>
   </div>
   <div class="avatar span2">
-    <%= image_tag @user_friendship.friend.gravatar_url, class: 'img-circle' %><br />
+    <%= avatar_profile_link @user_friendship.friend %><br />
     <p><%= @user_friendship.friend.full_name %></p>
   </div>
 </div>

@@ -9,7 +9,7 @@
     <div class="status">
         <div class="row">
             <div class="span 1">
-                <%= link_to image_tag(status.user.gravatar_url, class: 'img-circle'), profile_path(status.user.profile_name) %>
+                <%= avatar_profile_link status.user %>
             </div>
             <div class="span7">
                 <strong>

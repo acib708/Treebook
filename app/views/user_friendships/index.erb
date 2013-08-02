@@ -20,7 +20,7 @@
         <div class="media-body">
           <h4 class="media-heading"><%= friend.full_name %></h4>
           <em>Friendship is <%= friendship.state %></em>. <br />
-          <%= link_to "#{friendship.update_action_verbiage}", edit_user_friendship_path(friendship.friend.profile_name), class: 'btn btn-small' %>
+          <%= link_to friendship.update_action_verbiage, edit_user_friendship_path(friendship.friend.profile_name), class: 'btn btn-small' %>
         </div>
       </div>
   <% end %>

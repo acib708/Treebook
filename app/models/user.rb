@@ -1,14 +1,16 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  # Setup accessible (or protected) attributes for your model
-  #noinspection RailsParamDefResolve
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :profile_name
-  # attr_accessible :title, :body
-  
+
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :profile_name, :avatar
+
+  has_attached_file :avatar, styles: {
+      large: '800x800>',
+      medium: '300x200>',
+      small: '260x180>',
+      thumb: '80x80#'
+  }
+
   #Relationships
   has_many :statuses
   has_many :user_friendships
@@ -35,6 +37,16 @@ class User < ActiveRecord::Base
                      message: 'Must be formatted correctly.'
                  }
   #Methods
+  def self.get_gravatars
+    all.each do |user|
+      if !user.avatar?
+        user.avatar = URI.parse user.gravatar_url
+        user.save
+        print '.'
+      end
+    end
+  end
+
   def full_name
   	first_name + ' ' + last_name
   end
